@@ -6,5 +6,5 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-app.post('/api/v1/user/register',userRouter);
+app.post('/api/v1/userRegister',userRouter);
 module.exports = {app};
