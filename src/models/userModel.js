@@ -41,6 +41,15 @@ userSchema.methods({
     );
     return accessToken;
   },
+  genereteRefreshToken: async function (){
+    const user = this;
+    const refreshToken = jwt.sign(
+      { _id: user._id },
+      process.env.JWT_REFRESH_TOKEN,
+      { expiresIn: "7d" }
+    );
+    return refreshToken;
+  }
 });
 
 const User = mongoose.model("user", userSchema);
