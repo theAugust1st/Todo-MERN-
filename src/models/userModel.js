@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -18,6 +19,14 @@ const userSchema = new mongoose.Schema({
         minlength:6,
         maxlength:20
     }
+})
+userSchema.pre('save', async function (next){
+    const user = this;
+    if(!user.isModified('password'))
+        return next();
+    const hashedPassword = await bcrypt.hash(user.password);
+    user.password = hashedPassword;
+    next();
 })
 
 const User = mongoose.model('user',userSchema);
