@@ -3,7 +3,7 @@ import Home from "./Page/Home.jsx"
 function App() {
   return (
     <>
-      <div>
+      <div className="bg-pink-100 p-5">
         <Home />
       </div>
     </>
