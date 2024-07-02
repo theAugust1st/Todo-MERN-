@@ -29,18 +29,26 @@ const DynamicCreateTasks = () => {
   };
 
   const handleTaskInputChange = (e) => {
+    
     setTaskInput(e.target.value);
   };
 
   const handleAddTask = (e) => {
     e.preventDefault();
+    if(taskInput === '')
+      return
     setTodos((prevTodos) => ({
       ...prevTodos,
       tasks: [...prevTodos.tasks, taskInput],
     }));
     setTaskInput("");
   };
-
+  const deleteTask = (index) => {
+    setTodos((prevTodos) => ({
+      ...prevTodos,
+      tasks: prevTodos.tasks.filter((_, i) => i !== index),
+    }));
+  };
   return (
     <>
     <div>
@@ -81,7 +89,7 @@ const DynamicCreateTasks = () => {
         <div key={index} >
           <div className="flex justify-start space-x-5">
             <h3 className="text-green-800 font-semibold">{task}</h3>
-            <button>
+            <button onClick={()=>deleteTask(index)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
