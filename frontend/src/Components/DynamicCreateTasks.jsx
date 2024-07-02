@@ -13,6 +13,7 @@ const DynamicCreateTasks = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await setToBackend();
+    setTodos({ title: "", tasks: [], time: "" });
   };
 
   const setToBackend = async () => {
