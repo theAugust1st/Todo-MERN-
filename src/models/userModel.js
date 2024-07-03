@@ -19,6 +19,9 @@ const userSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 20,
   },
+  refreshToken: {
+    type: String,
+  },
 });
 userSchema.pre("save", async function (next) {
   const user = this;
