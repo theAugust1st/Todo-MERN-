@@ -23,19 +23,19 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", async function (next) {
   const user = this;
   if (!user.isModified("password")) return next();
-  const hashedPassword = await bcrypt.hash(user.password);
+  const hashedPassword = await bcrypt.hash(user.password,10);
   user.password = hashedPassword;
   next();
 });
 
-userSchema.methods({
+userSchema.method({
   comparePassword: async function (candidatePassword) {
     return await bcrypt.compare(candidatePassword, this.password);
   },
   generateAccessToken: async function () {
     const user = this;
     const accessToken = jwt.sign(
-      { _id: user._id },
+      {data:user},
       process.env.JWT_ACCESS_TOKEN,
       { expiresIn: "1h" }
     );
