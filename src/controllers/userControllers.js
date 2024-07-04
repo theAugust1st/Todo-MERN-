@@ -1,6 +1,6 @@
 const User = require("../models/userModel.js");
-
-const userRegister = async (req, res) => {
+const asyncHandler = require("../utils/asyncHandler.js")
+const userRegister = asyncHandler(async (req, res) => {
   try {
     const { name, email, password } = req.body;
     if (!(name && email && password)) {
@@ -35,7 +35,7 @@ const userRegister = async (req, res) => {
       message: "Something went wrong",
     });
   }
-};
+});
 
 const getUsers = async (req,res)=>{
   try {
